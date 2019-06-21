@@ -55,13 +55,11 @@ class RegisterPageComponent extends React.Component {
     // reset login status
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
-      submitted: false
+      firstName: "",
+      lastName: ""
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -70,13 +68,10 @@ class RegisterPageComponent extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
+    const { email, password, lastName, firstName } = this.state;
     const { dispatch } = this.props;
-    if (username && password) {
-      dispatch(userActions.login(username, password));
+    if (email && password && firstName && lastName) {
+      dispatch(userActions.register(this.state));
     }
   }
 
@@ -103,6 +98,9 @@ class RegisterPageComponent extends React.Component {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -114,6 +112,9 @@ class RegisterPageComponent extends React.Component {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -125,6 +126,9 @@ class RegisterPageComponent extends React.Component {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -137,6 +141,9 @@ class RegisterPageComponent extends React.Component {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -147,7 +154,9 @@ class RegisterPageComponent extends React.Component {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              onClick={e => {
+                this.handleSubmit(e);
+              }}
               fullWidth
               variant="contained"
               color="primary"
@@ -179,10 +188,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
 export const RegisterPage = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(withStyles(styles)(RegisterPageComponent));

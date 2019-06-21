@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
-
+import "./App.css";
 import { history } from "Helpers";
 import { alertActions } from "Actions";
 import { PrivateRoute } from "Components/Routing";
@@ -21,9 +21,9 @@ class App extends React.Component {
   render() {
     const { alert } = this.props;
     return (
-      <div className="jumbotron">
-        <div className="container">
-          <div className="col-sm-8 col-sm-offset-2">
+      <div className="App">
+        <div>
+          <div>
             {alert.message && (
               <div className={`alert ${alert.type}`}>{alert.message}</div>
             )}
