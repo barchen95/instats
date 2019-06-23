@@ -1,12 +1,9 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import "./App.css";
-import { history } from "Helpers";
 import { alertActions } from "Actions";
-import { PrivateRoute } from "Components/Routing";
-import { MainPage, LoginPage, RegisterPage } from "Components/Pages";
-
+import { MainRouter } from "../Components/Routing";
+import { history } from "Helpers";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,13 +24,8 @@ class App extends React.Component {
             {alert.message && (
               <div className={`alert ${alert.type}`}>{alert.message}</div>
             )}
-            <Router history={history}>
-              <div>
-                <PrivateRoute exact path="/" component={MainPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
-              </div>
-            </Router>
+
+            <MainRouter />
           </div>
         </div>
       </div>
