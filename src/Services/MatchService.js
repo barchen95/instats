@@ -4,7 +4,6 @@ export const matchService = {
 };
 
 function saveMatch(currentMatch) {
-  debugger;
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
@@ -20,7 +19,6 @@ function saveMatch(currentMatch) {
     result => {
       // store user details and jwt token in local storage to keep user logged in
       // between page refreshes
-      debugger;
       return result;
     }
   );

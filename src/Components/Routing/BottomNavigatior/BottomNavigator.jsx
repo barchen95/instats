@@ -10,9 +10,10 @@ import { withTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: 500,
+    width: "100vw",
     backgroundColor: theme.palette.primary.main,
-    marginTop: "18em"
+    position: "absolute",
+    bottom: "0px"
   },
   cell: {
     "&.MuiBottomNavigationAction-root.Mui-selected": {

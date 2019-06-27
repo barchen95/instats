@@ -8,7 +8,8 @@ import {
   ProfilePage,
   LoginPage,
   MatchPage,
-  RegisterPage
+  RegisterPage,
+  SessionPage
 } from "Components/Pages";
 export const MainRouter = () => {
   return (
@@ -16,7 +17,8 @@ export const MainRouter = () => {
       <div>
         <PrivateRoute exact path="/" component={MainPage} />
         <PrivateRoute exact path="/profile" component={ProfilePage} />
-        <PrivateRoute exact path="/match" component={MatchPage} />
+        <PrivateRoute exact path="/match" component={SessionPage} />
+        <PrivateRoute exact path="/currentMatch" component={MatchPage} />
 
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />

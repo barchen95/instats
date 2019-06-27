@@ -110,7 +110,8 @@ class GoalDescriptionFormComponent extends Component {
   }
 }
 function mapStateToProps(state) {
-  const { teams } = state.currentMatch.teams;
+  const teams = state.currentSession.courtPlayers.sessionTeams.slice(0, 2);
+
   return {
     teams
   };

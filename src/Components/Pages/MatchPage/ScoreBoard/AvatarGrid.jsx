@@ -89,7 +89,7 @@ export default function SpacingGrid(props) {
           {props.teams.map(value => (
             <Grid key={value} item>
               <Paper className={classes.paper}>
-                {generateAvatars(value.players, classes)}
+                {generateAvatars(value, classes)}
               </Paper>
             </Grid>
           ))}

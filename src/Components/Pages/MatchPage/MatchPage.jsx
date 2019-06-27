@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StopWatch } from "./StopWatch";
 import { GoalButton } from "./GoalButton/GoalButton";
 import { ScoreBoard } from "./ScoreBoard";
