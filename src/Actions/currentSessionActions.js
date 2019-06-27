@@ -1,4 +1,4 @@
-import { courtConstants } from "Constants";
+import { courtConstants, currentMatchConstants } from "Constants";
 import { store } from "Helpers";
 import _ from "lodash";
 import { CurrentSessionService } from "Services";
@@ -15,14 +15,20 @@ function addPlayer(player) {
   };
 }
 function mixPlayers() {
-  const { courtPlayers } = store.getState().currentSession;
+  return dispatch => {
+    const { courtPlayers } = store.getState().currentSession;
 
-  let players = courtPlayers.courtPlayers;
+    let players = courtPlayers.courtPlayers;
+    const teams = CurrentSessionService.mixPlayers(players);
+    dispatch({
+      type: courtConstants.MIX_PLAYERS,
+      payload: teams
+    });
 
-  return {
-    type: courtConstants.MIX_PLAYERS,
-
-    payload: CurrentSessionService.mixPlayers(players)
+    dispatch({
+      type: currentMatchConstants.SET_TEAMS,
+      payload: teams
+    });
   };
 }
 function removePlayer(player) {

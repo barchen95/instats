@@ -38,7 +38,7 @@ function mapStateToProps(state) {
   // const { teams } = state.currentMatch.teams;
 
   debugger;
-  const teams = state.currentSession.courtPlayers.sessionTeams.slice(0, 2);
+  const teams = state.currentMatch.teams.teams;
   const { score } = state.currentMatch;
 
   const homeScore = score.currentScore[0];
