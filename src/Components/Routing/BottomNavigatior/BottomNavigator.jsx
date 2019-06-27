@@ -2,16 +2,18 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+import HomeIcon from "@material-ui/icons/Home";
+import { FaFutbol } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import FaceIcon from "@material-ui/icons/FaceSharp";
 import { withTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: 500,
+    width: "100vw",
     backgroundColor: theme.palette.primary.main,
-    marginTop: "18em"
+    position: "absolute",
+    bottom: "0px"
   },
   cell: {
     "&.MuiBottomNavigationAction-root.Mui-selected": {
@@ -39,22 +41,28 @@ function LabelBottomNavigation() {
       className={classes.root}
     >
       <BottomNavigationAction
-        label="Recents"
+        label="Home"
         className={classes.cell}
-        value="recents"
-        icon={<RestoreIcon />}
+        value="home"
+        component={Link}
+        to="/"
+        icon={<HomeIcon style={{ width: "30px", height: "30px" }} />}
       />
       <BottomNavigationAction
-        label="Favorites"
+        label="Current Match"
         className={classes.cell}
-        value="favorites"
-        icon={<FavoriteIcon />}
+        value="Current Match"
+        component={Link}
+        to="/match"
+        icon={<FaFutbol style={{ width: "30px", height: "30px" }} />}
       />
       <BottomNavigationAction
         className={classes.cell}
-        label="Nearby"
-        value="nearby"
-        icon={<LocationOnIcon />}
+        component={Link}
+        to="/profile"
+        label="Profile"
+        value="Profile"
+        icon={<FaceIcon style={{ width: "30px", height: "30px" }} />}
       />
     </BottomNavigation>
   );

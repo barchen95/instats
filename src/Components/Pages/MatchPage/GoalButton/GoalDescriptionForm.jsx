@@ -48,7 +48,7 @@ class GoalDescriptionFormComponent extends Component {
 
   renderPlayers = () => {
     if (this.state.team !== "") {
-      return this.props.teams[this.state.team].players.map((player, key) => {
+      return this.props.teams[this.state.team].map((player, key) => {
         return <option value={key}>{player.name}</option>;
       });
     }
@@ -110,7 +110,8 @@ class GoalDescriptionFormComponent extends Component {
   }
 }
 function mapStateToProps(state) {
-  const { teams } = state.currentMatch.teams;
+  const teams = state.currentMatch.teams.teams;
+
   return {
     teams
   };

@@ -91,10 +91,13 @@ function goalScored(team, scorer, assisted) {
       type: gameLogConstants.WRITE,
       payload: {
         team,
-        scorer: store.getState().currentMatch.teams.teams[team].players[scorer],
-        assisted: store.getState().currentMatch.teams.teams[team].players[
-          assisted
+
+        scorer: store.getState().currentSession.courtPlayers.sessionTeams[team][
+          scorer
         ],
+        assisted: store.getState().currentSession.courtPlayers.sessionTeams[
+          team
+        ][assisted],
         time: store.getState().currentMatch.time
       }
     });
