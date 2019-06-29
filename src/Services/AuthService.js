@@ -13,7 +13,11 @@ function login(email, password) {
   const user = { email, password };
   localStorage.setItem("user", JSON.stringify(user));
   return user;
-  return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
+  // return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
+  return fetch(
+    `https://instats-server.herokuapp.com/users/authenticate`,
+    requestOptions
+  )
     .then(handleResponse)
     .then(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -30,9 +34,11 @@ function register(user) {
     body: JSON.stringify(user)
   };
 
-  return fetch(`http://localhost:4000/users/register`, requestOptions).then(
-    handleResponse
-  );
+  // return fetch(`http://localhost:4000/users/register`, requestOptions).then(
+  return fetch(
+    `https://instats-server.herokuapp.com/users/register`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function handleResponse(response) {

@@ -10,9 +10,11 @@ function getAll() {
     headers: authHeader()
   };
 
-  return fetch(`http://localhost:4000/users/getall`, requestOptions).then(
-    handleResponse
-  );
+  // return fetch(`http://localhost:4000/users/getall`, requestOptions).then(
+  return fetch(
+    `https://instats-server.herokuapp.com/users/getall`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function handleResponse(response) {
