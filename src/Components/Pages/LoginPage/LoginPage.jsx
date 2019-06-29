@@ -55,12 +55,8 @@ class LoginPageComponent extends React.Component {
 
     this.state = {
       username: "",
-      password: "",
-      submitted: false
+      password: ""
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -71,11 +67,10 @@ class LoginPageComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
+    const { email, password } = this.state;
     const { dispatch } = this.props;
-    if (username && password) {
-      dispatch(userActions.login(username, password));
+    if (email && password) {
+      dispatch(userActions.login(email, password));
     }
   }
 
@@ -101,6 +96,7 @@ class LoginPageComponent extends React.Component {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={e => this.handleChange(e)}
               autoFocus
             />
             <TextField
@@ -113,13 +109,14 @@ class LoginPageComponent extends React.Component {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={e => this.handleChange(e)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
             <Button
-              type="submit"
+              onClick={e => this.handleSubmit(e)}
               fullWidth
               variant="contained"
               color="primary"
@@ -157,10 +154,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
 export const LoginPage = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(withStyles(styles)(LoginPageComponent));

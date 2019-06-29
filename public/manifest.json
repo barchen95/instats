@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Rishonim",
+  "name": "Rishonim app",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,7 +9,7 @@
     }
   ],
   "start_url": ".",
-  "display": "fullscreen",
-  "theme_color": "#000000",
+  "display": "standalone",
+  "theme_color": "#3367D6",
   "background_color": "#ffffff"
 }

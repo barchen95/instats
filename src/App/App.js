@@ -1,12 +1,9 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
-
-import { history } from "Helpers";
+import "./App.css";
 import { alertActions } from "Actions";
-import { PrivateRoute } from "Components/Routing";
-import { MainPage, LoginPage, RegisterPage } from "Components/Pages";
-
+import { MainRouter } from "../Components/Routing";
+import { history } from "Helpers";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,19 +18,14 @@ class App extends React.Component {
   render() {
     const { alert } = this.props;
     return (
-      <div className="jumbotron">
-        <div className="container">
-          <div className="col-sm-8 col-sm-offset-2">
+      <div className="App">
+        <div>
+          <div>
             {alert.message && (
               <div className={`alert ${alert.type}`}>{alert.message}</div>
             )}
-            <Router history={history}>
-              <div>
-                <PrivateRoute exact path="/" component={MainPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
-              </div>
-            </Router>
+
+            <MainRouter />
           </div>
         </div>
       </div>
