@@ -21,7 +21,22 @@ const TeamsComponent = props => {
     },
     columnOrder: ["column-1"]
   };
+  function removeDndIndex(index) {
+    let newIndex = index.replace("drag-", "");
+    newIndex = newIndex.replace("drop-", "");
 
+    return newIndex;
+  }
+  function dragEnd(param) {
+    const { dispatch } = props;
+    dispatch(
+      currentSessionActions.movePlayerBetweenTeams(
+        removeDndIndex(param.draggableId),
+        removeDndIndex(param.source.droppableId) - 1,
+        removeDndIndex(param.destination.droppableId) - 1
+      )
+    );
+  }
   function generateTeams() {
     const { dispatch } = props;
     dispatch(currentSessionActions.mixPlayers());
@@ -29,7 +44,10 @@ const TeamsComponent = props => {
   function renderItems() {
     if (props.sessionTeams) {
       return (
-        <DragDropContext style={{ margin: 0, width: "100%" }}>
+        <DragDropContext
+          onDragEnd={param => dragEnd(param)}
+          style={{ margin: 0, width: "100%" }}
+        >
           <Grid
             container
             spacing={2}

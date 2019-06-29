@@ -79,7 +79,6 @@ function getTwoTeams(players) {
   return teams;
 }
 function mixPlayers(players) {
-  debugger;
   players = [];
 
   for (let index = 0; index < 15; index++) {

@@ -12,9 +12,10 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     height: 150,
-    width: 210,
+    width: "20vh",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    overflowY: "scroll"
   },
   control: {
     padding: theme.spacing(2)

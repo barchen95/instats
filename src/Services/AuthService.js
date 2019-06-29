@@ -10,9 +10,9 @@ function login(email, password) {
     body: JSON.stringify({ email, password })
   };
 
-  localStorage.setItem("user", JSON.stringify(email));
-
-  return email;
+  const user = { email, password };
+  localStorage.setItem("user", JSON.stringify(user));
+  return user;
   return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
     .then(handleResponse)
     .then(user => {
