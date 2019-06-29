@@ -51,11 +51,7 @@ function GameLogComponent(props) {
       if (log.type) {
         return (
           <React.Fragment>
-            <Divider
-              className={classes.center}
-              variant="fullWidth"
-              component="li"
-            />
+            <Divider className={classes.center} component="li" />
             <ListItem className={classes.center}>
               <ListItemAvatar>
                 <Avatar>

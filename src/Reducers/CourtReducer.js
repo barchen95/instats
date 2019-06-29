@@ -37,6 +37,12 @@ export function courtReducer(state = initialState, action) {
         sessionTeams: [...action.payload]
       };
     }
+    case courtConstants.UPDATE_PLAYERS: {
+      return {
+        ...state,
+        sessionTeams: [...action.payload]
+      };
+    }
     default:
       return state;
   }

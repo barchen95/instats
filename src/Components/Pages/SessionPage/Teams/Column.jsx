@@ -35,7 +35,10 @@ export default class Column extends Component {
             }}
             {...provided.droppableProps}
           >
-            <h2> Team {this.props.teamIndex}</h2>
+            <h2>
+              {" "}
+              Team {this.props.teamIndex} {this.props.players.length} {"/5"}{" "}
+            </h2>
             {provided.placeholder}
             {this.renderPlayers(this.props.players)}
           </div>

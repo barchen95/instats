@@ -12,8 +12,8 @@ const styles = theme => ({
   fab: {
     margin: theme.spacing(1),
     fontSize: "5em",
-    width: "250px ",
-    height: "250px"
+    width: "30vh",
+    height: "30vh"
   },
   extendedIcon: {
     marginRight: theme.spacing(1)

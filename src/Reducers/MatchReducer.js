@@ -2,7 +2,6 @@ import { currentMatchConstants } from "Constants";
 export function teamsReducer(state = {}, action) {
   switch (action.type) {
     case currentMatchConstants.SET_TEAMS:
-      debugger;
       return {
         teams: action.payload.slice(0, 2)
       };
