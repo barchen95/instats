@@ -92,12 +92,11 @@ function goalScored(team, scorer, assisted) {
       payload: {
         team,
 
-        scorer: store.getState().currentSession.courtPlayers.sessionTeams[team][
-          scorer
-        ],
+        scorer: store.getState().currentSession.courtPlayers.sessionTeams[team]
+          .players[scorer],
         assisted: store.getState().currentSession.courtPlayers.sessionTeams[
           team
-        ][assisted],
+        ].players[assisted],
         time: store.getState().currentMatch.time
       }
     });

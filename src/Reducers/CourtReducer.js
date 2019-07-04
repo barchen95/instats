@@ -43,6 +43,13 @@ export function courtReducer(state = initialState, action) {
         sessionTeams: [...action.payload]
       };
     }
+
+    case courtConstants.SET_SESSION_ID: {
+      return {
+        ...state,
+        sessionID: action.payload
+      };
+    }
     default:
       return state;
   }

@@ -15,11 +15,12 @@ function saveMatch(currentMatch) {
     })
   };
 
-  return fetch(`http://localhost:4000/matches/saveMatch`, requestOptions).then(
-    result => {
-      // store user details and jwt token in local storage to keep user logged in
-      // between page refreshes
-      return result;
-    }
-  );
+  return fetch(
+    `http://localhost:4000/gameSessions/saveMatch`,
+    requestOptions
+  ).then(result => {
+    // store user details and jwt token in local storage to keep user logged in
+    // between page refreshes
+    return result;
+  });
 }

@@ -11,12 +11,10 @@ function login(email, password) {
   };
 
   const user = { email, password };
-  localStorage.setItem("user", JSON.stringify(user));
-  return user;
+
   return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
     .then(handleResponse)
     .then(user => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem("user", JSON.stringify(user));
 
       return user;
