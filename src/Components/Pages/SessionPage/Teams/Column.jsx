@@ -15,7 +15,7 @@ export default class Column extends Component {
             >
               <Chip
                 avatar={<Avatar alt="Natacha" src={player.imageURL} />}
-                label={player.name}
+                label={player.firstName}
               />
             </div>
           )}
@@ -24,6 +24,7 @@ export default class Column extends Component {
     });
   };
   render() {
+    const { players } = this.props.team;
     return (
       <Droppable droppableId={`drop-` + this.props.teamIndex}>
         {(provided, snapshot) => (
@@ -37,10 +38,10 @@ export default class Column extends Component {
           >
             <h2>
               {" "}
-              Team {this.props.teamIndex} {this.props.players.length} {"/5"}{" "}
+              Team {this.props.teamIndex} {players.length} {"/5"}{" "}
             </h2>
             {provided.placeholder}
-            {this.renderPlayers(this.props.players)}
+            {this.renderPlayers(players)}
           </div>
         )}
       </Droppable>

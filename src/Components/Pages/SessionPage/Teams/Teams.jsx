@@ -54,7 +54,7 @@ const TeamsComponent = props => {
             style={{ margin: 0, width: "100%", display: "flex" }}
           >
             {props.sessionTeams.map((team, index) => {
-              return <Column teamIndex={index + 1} players={team} />;
+              return <Column teamIndex={index + 1} team={team} />;
             })}
           </Grid>
         </DragDropContext>

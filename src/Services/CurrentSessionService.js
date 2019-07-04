@@ -1,8 +1,24 @@
 import _ from "lodash";
+import { authHeader } from "Helpers";
+
 import faker from "faker";
 export const CurrentSessionService = {
-  mixPlayers
+  mixPlayers,
+  createSession,
+  getCurrentSession
 };
+
+function getCurrentSession() {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(
+    `http://localhost:4000/gameSessions/getCurrentSession`,
+    requestOptions
+  ).then(handleResponse);
+}
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -78,20 +94,65 @@ function getTwoTeams(players) {
   }
   return teams;
 }
-function mixPlayers(players) {
+function mixPlayers(players, sessionID) {
   players = [];
 
   for (let index = 0; index < 15; index++) {
     players.push({
-      name: faker.name.findName(),
+      firstName: faker.name.findName(),
+      lastName: faker.name.findName(),
       rating: faker.random.number({ min: 1, max: 5 }),
       imageURL: faker.image.avatar(),
       id: index
     });
   } //
+
+  let teams = [];
   if (players.length === 15) {
-    return getThreeTeams(players);
+    teams = getThreeTeams(players);
   } else {
-    return getTwoTeams(players);
+    teams = getTwoTeams(players);
   }
+
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({
+      sessionID: sessionID,
+      teams: teams
+    })
+  };
+
+  return fetch(
+    `http://localhost:4000/gameSessions/setTeams`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function createSession() {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(
+    `http://localhost:4000/gameSessions/createSession`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function handleResponse(response) {
+  return response.text().then(text => {
+    const data = text && JSON.parse(text);
+    if (!response.ok) {
+      if (response.status === 401) {
+        // auto logout if 401 response returned from api
+      }
+
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
+    }
+
+    return data;
+  });
 }
