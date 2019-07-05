@@ -1,4 +1,5 @@
 export const gameLogConstants = {
   WRITE: "WRITE",
-  EDIT: "EDIT"
+  EDIT: "EDIT",
+  INIT: "GAME_LOG_INIT"
 };

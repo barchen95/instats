@@ -44,7 +44,7 @@ const SessionPageComponent = props => {
     dispatch(currentSessionActions.createSession());
   }
   let startButtonDisabled = false;
-  if (props.sessionTeams) {
+  if (props.sessionTeams && props.sessionTeams.length > 0) {
     startButtonDisabled =
       props.sessionTeams[0].players.length ==
         props.sessionTeams[1].players.length &&

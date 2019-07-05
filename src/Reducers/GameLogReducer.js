@@ -11,6 +11,12 @@ export function gameLogReducer(state = initialUserState, action) {
       };
     }
 
+    case gameLogConstants.INIT: {
+      return {
+        ...state,
+        logArray: []
+      };
+    }
     default:
       return state;
   }

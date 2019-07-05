@@ -6,6 +6,8 @@ export function timeReducer(state = {}, action) {
       return {
         ...action.payload
       };
+    case timeConstants.INIT_TIME:
+      return {};
     case timeConstants.GAME_STOP:
       return {
         ...action.payload

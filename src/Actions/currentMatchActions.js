@@ -3,6 +3,7 @@ import {
   gameLogConstants,
   modalConstants,
   scoreConstants,
+  timeConstants,
   matchStatusConstants
 } from "Constants";
 import { store } from "Helpers";
@@ -17,10 +18,31 @@ export const currentMatchActions = {
 };
 
 function saveMatch() {
-  matchService.saveMatch(store.getState().currentMatch).then(res => {});
-  return {
-    type: matchStatusConstants.CHANGE_STATUS,
-    payload: matchStatusConstants.SHOW_MATCH_SUMMRY
+  return dispatch => {
+    matchService.saveMatch(store.getState().currentMatch).then(res => {
+      dispatch({
+        type: matchStatusConstants.CHANGE_STATUS,
+        payload: matchStatusConstants.WAIT_TO_START
+      });
+
+      dispatch({
+        type: gameLogConstants.INIT
+      });
+      dispatch({
+        type: timeConstants.INIT_TIME
+      });
+      dispatch({
+        type: scoreConstants.INIT_SCORE
+      });
+
+      debugger;
+      const { sessionTeams } = store.getState().currentSession.courtPlayers;
+
+      dispatch({
+        type: currentMatchConstants.SET_TEAMS,
+        payload: sessionTeams
+      });
+    });
   };
 }
 function onGameEnd() {
@@ -86,17 +108,14 @@ function goalScored(team, scorer, assisted) {
       }
     });
     dispatch({ type: modalConstants.CLOSE });
-
+    const teams = store.getState().currentMatch.teams.teams;
     dispatch({
       type: gameLogConstants.WRITE,
       payload: {
         team,
 
-        scorer: store.getState().currentSession.courtPlayers.sessionTeams[team]
-          .players[scorer],
-        assisted: store.getState().currentSession.courtPlayers.sessionTeams[
-          team
-        ].players[assisted],
+        scorer: teams[team].players[scorer],
+        assisted: teams[team].players[assisted],
         time: store.getState().currentMatch.time
       }
     });

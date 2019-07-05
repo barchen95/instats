@@ -26,9 +26,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "eject": "react-scripts eject",
+    "deploy-production": "react-scripts build && scp -r ./build/* yoni@174.138.4.80:/var/www/rishonims.com/html",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"

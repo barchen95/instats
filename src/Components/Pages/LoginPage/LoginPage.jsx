@@ -122,7 +122,7 @@ class LoginPageComponent extends React.Component {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Login
             </Button>
 
             <Grid container>

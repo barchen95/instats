@@ -42,7 +42,7 @@ const TeamsComponent = props => {
     dispatch(currentSessionActions.mixPlayers());
   }
   function renderItems() {
-    if (props.sessionTeams) {
+    if (props.sessionTeams && props.sessionTeams.length > 0) {
       return (
         <DragDropContext
           onDragEnd={param => dragEnd(param)}

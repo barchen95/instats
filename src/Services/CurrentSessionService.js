@@ -3,9 +3,10 @@ import { authHeader } from "Helpers";
 
 import faker from "faker";
 export const CurrentSessionService = {
-  mixPlayers,
   createSession,
-  getCurrentSession
+  getCurrentSession,
+  mixPlayers,
+  updateCourtPlayers
 };
 
 function getCurrentSession() {
@@ -137,6 +138,21 @@ function createSession() {
 
   return fetch(
     `http://localhost:4000/gameSessions/createSession`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function updateCourtPlayers(player) {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({
+      player: player
+    })
+  };
+
+  return fetch(
+    `http://localhost:4000/gameSessions/updateCourtPlayers`,
     requestOptions
   ).then(handleResponse);
 }

@@ -35,8 +35,6 @@ function SimpleCard(props) {
 }
 
 function mapStateToProps(state) {
-  // const { teams } = state.currentMatch.teams;
-
   const teams = state.currentMatch.teams.teams;
   const { score } = state.currentMatch;
 

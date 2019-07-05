@@ -3,8 +3,7 @@ import { store } from "Helpers";
 import _ from "lodash";
 import { CurrentSessionService } from "Services";
 export const currentSessionActions = {
-  addPlayer,
-  removePlayer,
+  updateCourtPlayerStatus,
   mixPlayers,
   movePlayerBetweenTeams,
   createSession,
@@ -30,6 +29,17 @@ function setCurrentSession(session) {
       type: currentMatchConstants.SET_TEAMS,
       payload: session.currentTeams
     });
+
+    dispatch({
+      type: courtConstants.SET_PLAYERS,
+      payload: session.courtPlayers
+    });
+
+    debugger;
+    dispatch({
+      type: courtConstants.SET_MATCHES,
+      payload: session.matches
+    });
   };
 }
 
@@ -43,7 +53,6 @@ function movePlayerBetweenTeams(playerID, currentTeam, newTeam) {
     ) {
       return p.id == playerID;
     });
-    debugger;
     sessionTeams[newTeam].players.push(removedPlayer[0]);
     dispatch({
       type: courtConstants.UPDATE_PLAYERS,
@@ -74,15 +83,19 @@ function mixPlayers() {
     });
   };
 }
-function removePlayer(player) {
-  return {
-    type: courtConstants.REMOVE_PLAYER,
-    payload: player
-  };
-}
-function addPlayer(player) {
-  return {
-    type: courtConstants.ADD_PLAYER,
-    payload: player
+
+function updateCourtPlayerStatus(player, status) {
+  return dispatch => {
+    CurrentSessionService.updateCourtPlayers(player).then(result => {
+      dispatch({
+        type: status,
+        payload: player
+      });
+    });
+
+    dispatch({
+      type: "courtConstants.REQUEST",
+      payload: player
+    });
   };
 }

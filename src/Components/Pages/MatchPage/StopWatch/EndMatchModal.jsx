@@ -6,8 +6,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect } from "react-redux";
 import Slide from "@material-ui/core/Slide";
 import { ScoreBoard } from "../ScoreBoard";
-
 import { makeStyles } from "@material-ui/core/styles";
+import { history } from "Helpers";
 import { currentMatchActions } from "Actions";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -27,6 +27,7 @@ function EndMatchModalComponent(props) {
     const { dispatch } = props;
 
     dispatch(currentMatchActions.saveMatch());
+    history.push("/match");
   }
   return (
     <Dialog
