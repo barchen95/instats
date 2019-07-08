@@ -3,16 +3,17 @@ export const authService = {
   register
 };
 
-function login(email, password) {
+function login(username, password) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ username, password })
   };
 
-  const user = { email, password };
-
-  return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
+  return fetch(
+    `http://www.rishonims.com/server/users/authenticate`,
+    requestOptions
+  )
     .then(handleResponse)
     .then(user => {
       localStorage.setItem("user", JSON.stringify(user));
@@ -28,9 +29,10 @@ function register(user) {
     body: JSON.stringify(user)
   };
 
-  return fetch(`http://localhost:4000/users/register`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(
+    `http://www.rishonims.com/server/users/register`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function handleResponse(response) {

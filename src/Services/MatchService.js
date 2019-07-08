@@ -16,7 +16,8 @@ function saveMatch(currentMatch) {
   };
 
   return fetch(
-    `http://localhost:4000/gameSessions/saveMatch`,
+    // `http://www.rishonims.com/server/gameSessions/saveMatch`,
+    `http://www.rishonims.com/server/gameSessions/saveMatch`,
     requestOptions
   ).then(result => {
     // store user details and jwt token in local storage to keep user logged in
