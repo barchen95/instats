@@ -9,8 +9,8 @@ function getAll() {
         method: "GET",
         headers: authHeader()
     };
-    return fetch(`http://www.rishonims.com/server/users/getall`, requestOptions).then(
-    // return fetch(`http://www.rishonims.com/server/users/getall`,
+    return fetch(`http://134.209.241.89/server/users/getall`, requestOptions).then(
+    // return fetch(`http://134.209.241.89/server/users/getall`,
     // requestOptions).then(
     handleResponse);
 }

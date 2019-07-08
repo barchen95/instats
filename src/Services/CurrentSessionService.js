@@ -15,7 +15,7 @@ function getCurrentSession() {
         headers: authHeader()
     };
 
-    return fetch(`http://www.rishonims.com/server/gameSessions/getCurrentSession`, requestOptions).then(handleResponse);
+    return fetch(`http://134.209.241.89/server/gameSessions/getCurrentSession`, requestOptions).then(handleResponse);
 }
 
 function shuffle(array) {
@@ -130,7 +130,7 @@ function mixPlayers(players, sessionID) {
         body: JSON.stringify({sessionID: sessionID, teams: teams})
     };
 
-    return fetch(`http://www.rishonims.com/server/gameSessions/setTeams`, requestOptions).then(handleResponse);
+    return fetch(`http://134.209.241.89/server/gameSessions/setTeams`, requestOptions).then(handleResponse);
 }
 
 function createSession() {
@@ -139,7 +139,7 @@ function createSession() {
         headers: authHeader()
     };
 
-    return fetch(`http://www.rishonims.com/server/gameSessions/createSession`, requestOptions).then(handleResponse);
+    return fetch(`http://134.209.241.89/server/gameSessions/createSession`, requestOptions).then(handleResponse);
 }
 
 function updateCourtPlayers(player) {
@@ -149,7 +149,7 @@ function updateCourtPlayers(player) {
         body: JSON.stringify({player: player})
     };
 
-    return fetch(`http://www.rishonims.com/server/gameSessions/updateCourtPlayers`, requestOptions).then(handleResponse);
+    return fetch(`http://134.209.241.89/server/gameSessions/updateCourtPlayers`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

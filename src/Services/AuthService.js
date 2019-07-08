@@ -11,7 +11,7 @@ function login(username, password) {
   };
 
   return fetch(
-    `http://www.rishonims.com/server/users/authenticate`,
+    `http://134.209.241.89/server/users/authenticate`,
     requestOptions
   )
     .then(handleResponse)
@@ -30,7 +30,7 @@ function register(user) {
   };
 
   return fetch(
-    `http://www.rishonims.com/server/users/register`,
+    `http://134.209.241.89/server/users/register`,
     requestOptions
   ).then(handleResponse);
 }
