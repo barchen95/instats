@@ -3,24 +3,19 @@ export const authService = {
   register
 };
 
-function login(email, password) {
+function login(username, password) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ username, password })
   };
 
-  const user = { email, password };
-  localStorage.setItem("user", JSON.stringify(user));
-  return user;
-  // return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
   return fetch(
-    `https://instats-server.herokuapp.com/users/authenticate`,
+    `http://www.rishonims.com/server/users/authenticate`,
     requestOptions
   )
     .then(handleResponse)
     .then(user => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem("user", JSON.stringify(user));
 
       return user;
@@ -34,9 +29,8 @@ function register(user) {
     body: JSON.stringify(user)
   };
 
-  // return fetch(`http://localhost:4000/users/register`, requestOptions).then(
   return fetch(
-    `https://instats-server.herokuapp.com/users/register`,
+    `http://www.rishonims.com/server/users/register`,
     requestOptions
   ).then(handleResponse);
 }

@@ -42,7 +42,7 @@ const TeamsComponent = props => {
     dispatch(currentSessionActions.mixPlayers());
   }
   function renderItems() {
-    if (props.sessionTeams) {
+    if (props.sessionTeams && props.sessionTeams.length > 0) {
       return (
         <DragDropContext
           onDragEnd={param => dragEnd(param)}
@@ -54,7 +54,7 @@ const TeamsComponent = props => {
             style={{ margin: 0, width: "100%", display: "flex" }}
           >
             {props.sessionTeams.map((team, index) => {
-              return <Column teamIndex={index + 1} players={team} />;
+              return <Column teamIndex={index + 1} team={team} />;
             })}
           </Grid>
         </DragDropContext>

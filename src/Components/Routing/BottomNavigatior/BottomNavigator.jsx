@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100vw",
     backgroundColor: theme.palette.primary.main,
-    position: "absolute",
     bottom: "0px"
   },
   cell: {

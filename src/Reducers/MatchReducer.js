@@ -8,8 +8,8 @@ export function teamsReducer(state = {}, action) {
 
     case currentMatchConstants.NEW_GOAL: {
       const { team, scorer, assisted } = action.payload;
-      state.teams[team][scorer].asScored = true;
-      state.teams[team][assisted].asAssisted = true;
+      state.teams[team].players[scorer].asScored = true;
+      state.teams[team].players[assisted].asAssisted = true;
       return { ...state };
     }
 

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
 import { connect } from "react-redux";
 import { playerService } from "Services";
 import { ChangeableAvatar } from "./ChangeableAvatar";
 import { currentSessionActions } from "Actions";
+import { courtConstants } from "Constants";
 const useStyles = makeStyles(theme => ({
   root: {
     margin: "auto"
@@ -32,11 +32,19 @@ function SelectionGridComponent(props) {
 
   function addPlayerToMatch(player, clicked) {
     const { dispatch } = props;
-    if (!clicked) {
-      dispatch(currentSessionActions.addPlayer(player));
-    } else {
-      dispatch(currentSessionActions.removePlayer(player));
-    }
+    clicked
+      ? dispatch(
+          currentSessionActions.updateCourtPlayerStatus(
+            player,
+            courtConstants.REMOVE_PLAYER
+          )
+        )
+      : dispatch(
+          currentSessionActions.updateCourtPlayerStatus(
+            player,
+            courtConstants.ADD_PLAYER
+          )
+        );
   }
 
   function renderAvatars(players) {

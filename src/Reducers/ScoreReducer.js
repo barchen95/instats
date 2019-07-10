@@ -9,6 +9,11 @@ export function scoreReducer(state = { currentScore }, action) {
       state.currentScore[team]++;
       return state;
 
+    case scoreConstants.INIT_SCORE:
+      state.currentScore = [0, 0];
+
+      return state;
+
     default:
       return state;
   }

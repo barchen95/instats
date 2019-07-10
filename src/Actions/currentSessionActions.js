@@ -3,27 +3,57 @@ import { store } from "Helpers";
 import _ from "lodash";
 import { CurrentSessionService } from "Services";
 export const currentSessionActions = {
-  addPlayer,
-  removePlayer,
+  updateCourtPlayerStatus,
   mixPlayers,
-  movePlayerBetweenTeams
+  movePlayerBetweenTeams,
+  createSession,
+  setCurrentSession
 };
 
-function addPlayer(player) {
-  return {
-    type: courtConstants.ADD_PLAYER,
-    payload: player
+function createSession() {
+  return dispatch => {
+    CurrentSessionService.createSession().then(id => {
+      dispatch({ type: courtConstants.SET_SESSION_ID, payload: id });
+    });
   };
 }
+function setCurrentSession(session) {
+  return dispatch => {
+    dispatch({ type: courtConstants.SET_SESSION_ID, payload: session.id });
+    dispatch({
+      type: courtConstants.MIX_PLAYERS,
+      payload: session.currentTeams
+    });
+
+    dispatch({
+      type: currentMatchConstants.SET_TEAMS,
+      payload: session.currentTeams
+    });
+
+    dispatch({
+      type: courtConstants.SET_PLAYERS,
+      payload: session.courtPlayers
+    });
+
+    debugger;
+    dispatch({
+      type: courtConstants.SET_MATCHES,
+      payload: session.matches
+    });
+  };
+}
+
 function movePlayerBetweenTeams(playerID, currentTeam, newTeam) {
   return dispatch => {
     const { courtPlayers } = store.getState().currentSession;
     console.table(courtPlayers);
     let sessionTeams = courtPlayers.sessionTeams;
-    let removedPlayer = _.remove(sessionTeams[currentTeam], function(p) {
+    let removedPlayer = _.remove(sessionTeams[currentTeam].players, function(
+      p
+    ) {
       return p.id == playerID;
     });
-    sessionTeams[newTeam].push(removedPlayer[0]);
+    sessionTeams[newTeam].players.push(removedPlayer[0]);
     dispatch({
       type: courtConstants.UPDATE_PLAYERS,
       payload: sessionTeams
@@ -33,23 +63,39 @@ function movePlayerBetweenTeams(playerID, currentTeam, newTeam) {
 function mixPlayers() {
   return dispatch => {
     const { courtPlayers } = store.getState().currentSession;
-
+    const { sessionID } = courtPlayers;
     let players = courtPlayers.courtPlayers;
-    const teams = CurrentSessionService.mixPlayers(players);
-    dispatch({
-      type: courtConstants.MIX_PLAYERS,
-      payload: teams
+    CurrentSessionService.mixPlayers(players, sessionID).then(teams => {
+      dispatch({
+        type: courtConstants.MIX_PLAYERS,
+        payload: teams
+      });
+
+      dispatch({
+        type: currentMatchConstants.SET_TEAMS,
+        payload: teams
+      });
     });
 
     dispatch({
-      type: currentMatchConstants.SET_TEAMS,
-      payload: teams
+      type: "REQUEST_",
+      payload: null
     });
   };
 }
-function removePlayer(player) {
-  return {
-    type: courtConstants.REMOVE_PLAYER,
-    payload: player
+
+function updateCourtPlayerStatus(player, status) {
+  return dispatch => {
+    CurrentSessionService.updateCourtPlayers(player).then(result => {
+      dispatch({
+        type: status,
+        payload: player
+      });
+    });
+
+    dispatch({
+      type: "courtConstants.REQUEST",
+      payload: player
+    });
   };
 }

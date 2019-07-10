@@ -3,7 +3,6 @@ import { StopWatch } from "./StopWatch";
 import { GoalButton } from "./GoalButton/GoalButton";
 import { ScoreBoard } from "./ScoreBoard";
 import { GameLog } from "./GameLog";
-
 export const MatchPage = () => {
   return (
     <div

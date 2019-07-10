@@ -40,35 +40,35 @@ const useStyles = makeStyles(theme => ({
 
 function generateAvatars(players, classes) {
   return players.map(player => {
-    if (player.asScored) {
-      return (
-        <React.Fragment className={classes.margin}>
-          <Badge
-            className={{ root: classes.antiMargin }}
-            badgeContent={<FaFutbol />}
-            color="secondary"
-          >
-            <Avatar
-              alt="Remy Sharp"
-              src={player.imageURL}
-              className={classes.bigAvatar}
-            />
-          </Badge>
-        </React.Fragment>
-      );
-    }
+    // if (player.asScored) {
+    //   return (
+    //     <React.Fragment className={classes.margin}>
+    //       <Badge
+    //         className={{ root: classes.antiMargin }}
+    //         badgeContent={<FaFutbol />}
+    //         color="secondary"
+    //       >
+    //         <Avatar
+    //           alt="Remy Sharp"
+    //           src={player.imageURL}
+    //           className={classes.bigAvatar}
+    //         />
+    //       </Badge>
+    //     </React.Fragment>
+    //   );
+    // }
 
-    if (player.asAssisted) {
-      return (
-        <Badge badgeContent={<GiChefToque />} color="secondary">
-          <Avatar
-            alt="Remy Sharp"
-            src={player.imageURL}
-            className={classes.bigAvatar}
-          />
-        </Badge>
-      );
-    }
+    // if (player.asAssisted) {
+    //   return (
+    //     <Badge badgeContent={<GiChefToque />} color="secondary">
+    //       <Avatar
+    //         alt="Remy Sharp"
+    //         src={player.imageURL}
+    //         className={classes.bigAvatar}
+    //       />
+    //     </Badge>
+    //   );
+    // }
     return (
       <Avatar
         alt="Remy Sharp"
@@ -90,7 +90,7 @@ export default function SpacingGrid(props) {
           {props.teams.map(value => (
             <Grid key={value} item>
               <Paper className={classes.paper}>
-                {generateAvatars(value, classes)}
+                {generateAvatars(value.players, classes)}
               </Paper>
             </Grid>
           ))}
