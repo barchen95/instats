@@ -24,8 +24,6 @@ export function courtReducer(state = initialState, action) {
     }
 
     case courtConstants.SET_PLAYERS: {
-      debugger;
-
       return {
         ...state,
         courtPlayers: [...action.payload]
@@ -38,15 +36,12 @@ export function courtReducer(state = initialState, action) {
       };
     }
     case courtConstants.MIX_PLAYERS: {
-      debugger;
       return {
         ...state,
         sessionTeams: [...action.payload]
       };
     }
     case courtConstants.UPDATE_PLAYERS: {
-      debugger;
-
       return {
         ...state,
         sessionTeams: [...action.payload]
