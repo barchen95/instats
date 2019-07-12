@@ -35,7 +35,6 @@ function saveMatch() {
         type: scoreConstants.INIT_SCORE
       });
 
-      debugger;
       const { sessionTeams } = store.getState().currentSession.courtPlayers;
 
       dispatch({

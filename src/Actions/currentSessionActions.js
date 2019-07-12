@@ -35,7 +35,6 @@ function setCurrentSession(session) {
       payload: session.courtPlayers
     });
 
-    debugger;
     dispatch({
       type: courtConstants.SET_MATCHES,
       payload: session.matches

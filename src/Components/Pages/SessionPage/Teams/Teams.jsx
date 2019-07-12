@@ -59,7 +59,7 @@ const TeamsComponent = props => {
           </Grid>
         </DragDropContext>
       );
-    } else {
+    } else if (props.courtPlayers.length >= 10) {
       return (
         <Fab
           onClick={() => {
@@ -69,6 +69,8 @@ const TeamsComponent = props => {
           Generate teams
         </Fab>
       );
+    } else {
+      return <div />;
     }
   }
   return <>{renderItems()}</>;
