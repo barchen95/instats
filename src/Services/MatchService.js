@@ -1,26 +1,18 @@
-import { authHeader } from "Helpers";
+import {authHeader} from "Helpers";
 export const matchService = {
-  saveMatch
+    saveMatch
 };
 
 function saveMatch(currentMatch) {
-  const requestOptions = {
-    method: "POST",
-    headers: authHeader(),
-    body: JSON.stringify({
-      score: currentMatch.score.currentScore,
-      gameLog: currentMatch.gameLog.logArray,
-      teams: currentMatch.teams.teams,
-      time: currentMatch.time
-    })
-  };
+    const requestOptions = {
+        method: "POST",
+        headers: authHeader(),
+        body: JSON.stringify({score: currentMatch.score.currentScore, gameLog: currentMatch.gameLog.logArray, teams: currentMatch.teams.teams, time: currentMatch.time})
+    };
 
-  return fetch(
-    `http://localhost:4000/gameSessions/saveMatch`,
-    requestOptions
-  ).then(result => {
-    // store user details and jwt token in local storage to keep user logged in
-    // between page refreshes
-    return result;
-  });
+    return fetch(
+    `http://www.rishonims.com/server/gameSessions/saveMatch`, requestOptions).then(result => {
+        return result;
+    });
+
 }

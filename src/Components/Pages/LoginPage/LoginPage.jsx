@@ -67,10 +67,10 @@ class LoginPageComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     const { dispatch } = this.props;
-    if (email && password) {
-      dispatch(userActions.login(email, password));
+    if (username && password) {
+      dispatch(userActions.login(username, password));
     }
   }
 
@@ -92,10 +92,10 @@ class LoginPageComponent extends React.Component {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
               label="Email Address"
-              name="email"
-              autoComplete="email"
+              name="username"
+              autoComplete="username"
               onChange={e => this.handleChange(e)}
               autoFocus
             />

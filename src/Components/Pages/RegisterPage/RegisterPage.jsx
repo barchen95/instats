@@ -56,7 +56,7 @@ class RegisterPageComponent extends React.Component {
     // reset login status
 
     this.state = {
-      email: "",
+      username: "",
       password: "",
       firstName: "",
       lastName: "",
@@ -70,9 +70,9 @@ class RegisterPageComponent extends React.Component {
   }
 
   handleSubmit(e) {
-    const { email, password, lastName, firstName } = this.state;
+    const { username, password, lastName, firstName } = this.state;
     const { dispatch } = this.props;
-    if (email && password && firstName && lastName) {
+    if (username && password && firstName && lastName) {
       dispatch(userActions.register(this.state));
     }
   }
@@ -149,10 +149,10 @@ class RegisterPageComponent extends React.Component {
                   variant="outlined"
                   required
                   fullWidth
-                  id="email"
+                  id="username"
                   label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  name="username"
+                  autoComplete="username"
                   onChange={e => {
                     this.handleChange(e);
                   }}
