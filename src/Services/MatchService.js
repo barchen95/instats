@@ -1,4 +1,4 @@
-import { authHeader } from "Helpers";
+import { authHeader, config } from "Helpers";
 export const matchService = {
   saveMatch
 };

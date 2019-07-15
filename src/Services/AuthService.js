@@ -1,3 +1,5 @@
+import { config } from "Helpers";
+
 export const authService = {
   login,
   register

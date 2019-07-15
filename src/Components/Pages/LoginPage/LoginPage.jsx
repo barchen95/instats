@@ -67,11 +67,11 @@ class LoginPageComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { username, password } = this.state;
-    const { dispatch } = this.props;
-    if (username && password) {
-      dispatch(userActions.login(username, password));
-    }
+    // const { username, password } = this.state;
+    // const { dispatch } = this.props;
+    // if (username && password) {
+    //   dispatch(userActions.login(username, password));
+    // }
   }
 
   render() {
