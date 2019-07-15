@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import { userActions } from "Actions";
+import ImageUploader from "react-images-upload";
 
 function MadeWithLove() {
   return (
@@ -58,7 +59,8 @@ class RegisterPageComponent extends React.Component {
       username: "",
       password: "",
       firstName: "",
-      lastName: ""
+      lastName: "",
+      imageURL: ""
     };
   }
 
@@ -75,14 +77,39 @@ class RegisterPageComponent extends React.Component {
     }
   }
 
+  uploadImage(pictures) {
+    const reader = new FileReader();
+
+    reader.onabort = () => console.log("file reading was aborted");
+    reader.onerror = () => console.log("file reading has failed");
+    reader.onload = () => {
+      // Do whatever you want with the file contents
+      const binaryStr = reader.result;
+      const image = new Image();
+      image.src = binaryStr;
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const _this = this;
+      image.onload = function() {
+        canvas.width = 100;
+        canvas.height = 100;
+        context.drawImage(this, 0, 0, 100, 100);
+
+        _this.setState({ imageURL: canvas.toDataURL() });
+      };
+    };
+    reader.readAsDataURL(pictures[0]);
+  }
+
   render() {
     const { classes } = this.props;
+    const { imageURL } = this.state;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <FaAddressCard />
+          <Avatar className={classes.avatar} src={imageURL}>
+            {imageURL ? <></> : <FaAddressCard />}
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -144,6 +171,16 @@ class RegisterPageComponent extends React.Component {
                   onChange={e => {
                     this.handleChange(e);
                   }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ImageUploader
+                  withIcon={true}
+                  buttonText="Choose images"
+                  onChange={image => this.uploadImage(image)}
+                  imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                  maxFileSize={5242880}
+                  singleImage
                 />
               </Grid>
               <Grid item xs={12}>
