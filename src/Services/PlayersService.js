@@ -10,10 +10,9 @@ function getAll() {
     headers: authHeader()
   };
 
-  return fetch(
-    `https://www.rishonims.com/server/users/getall`,
-    requestOptions
-  ).then(handleResponse);
+  return fetch(`${config.apiURL}/users/getall`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function handleResponse(response) {

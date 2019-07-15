@@ -15,10 +15,9 @@ function saveMatch(currentMatch) {
     })
   };
 
-  return fetch(
-    `https://www.rishonims.com/server/gameSessions/saveMatch`,
-    requestOptions
-  ).then(result => {
-    return result;
-  });
+  return fetch(`${config.apiURL}/gameSessions/saveMatch`, requestOptions).then(
+    result => {
+      return result;
+    }
+  );
 }

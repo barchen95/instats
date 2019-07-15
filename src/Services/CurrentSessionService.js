@@ -1,7 +1,6 @@
 import _ from "lodash";
-import { authHeader } from "Helpers";
+import { authHeader, config } from "Helpers";
 
-import faker from "faker";
 export const CurrentSessionService = {
   createSession,
   getCurrentSession,
@@ -16,7 +15,7 @@ function getCurrentSession() {
   };
 
   return fetch(
-    `https://www.rishonims.com/server/gameSessions/getCurrentSession`,
+    `${config.apiURL}/gameSessions/getCurrentSession`,
     requestOptions
   ).then(handleResponse);
 }
@@ -109,10 +108,9 @@ function mixPlayers(players, sessionID) {
     body: JSON.stringify({ sessionID: sessionID, teams: teams })
   };
 
-  return fetch(
-    `https://www.rishonims.com/server/gameSessions/setTeams`,
-    requestOptions
-  ).then(handleResponse);
+  return fetch(`${config.apiURL}/gameSessions/setTeams`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function createSession() {
@@ -122,7 +120,7 @@ function createSession() {
   };
 
   return fetch(
-    `https://www.rishonims.com/server/gameSessions/createSession`,
+    `${config.apiURL}/gameSessions/createSession`,
     requestOptions
   ).then(handleResponse);
 }
@@ -135,7 +133,7 @@ function updateCourtPlayers(player) {
   };
 
   return fetch(
-    `https://www.rishonims.com/server/gameSessions/updateCourtPlayers`,
+    `${config.apiURL}/gameSessions/updateCourtPlayers`,
     requestOptions
   ).then(handleResponse);
 }

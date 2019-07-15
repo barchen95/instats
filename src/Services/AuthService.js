@@ -10,10 +10,7 @@ function login(username, password) {
     body: JSON.stringify({ username, password })
   };
 
-  return fetch(
-    `https://www.rishonims.com/server/users/authenticate`,
-    requestOptions
-  )
+  return fetch(`${config.apiURL}/users/authenticate`, requestOptions)
     .then(handleResponse)
     .then(user => {
       localStorage.setItem("user", JSON.stringify(user));
@@ -29,10 +26,9 @@ function register(user) {
     body: JSON.stringify(user)
   };
 
-  return fetch(
-    `https://www.rishonims.com/server/users/register`,
-    requestOptions
-  ).then(handleResponse);
+  return fetch(`${config.apiURL}/users/register`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function handleResponse(response) {
