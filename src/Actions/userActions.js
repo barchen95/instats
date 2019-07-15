@@ -9,16 +9,16 @@ export const userActions = {
   register
 };
 
-function login(username, password) {
+function login(email, password) {
   return dispatch => {
-    dispatch({ type: userConstants.LOGIN_REQUEST, username });
+    dispatch({ type: userConstants.LOGIN_REQUEST, email });
 
-    localStorage.setItem("user", JSON.stringify(username));
+    localStorage.setItem("user", JSON.stringify(email));
 
-    dispatch({ type: userConstants.LOGIN_SUCCESS, username });
+    dispatch({ type: userConstants.LOGIN_SUCCESS, email });
     dispatch({ type: currentMatchConstants.GET_TEAMS });
 
-    authService.login(username, password).then(
+    authService.login(email, password).then(
       user => {
         dispatch({ type: userConstants.LOGIN_SUCCESS, user });
         history.push("/");

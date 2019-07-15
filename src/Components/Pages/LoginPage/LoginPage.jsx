@@ -54,7 +54,7 @@ class LoginPageComponent extends React.Component {
     // reset login status
 
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
   }
@@ -66,11 +66,11 @@ class LoginPageComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    // const { username, password } = this.state;
+    alert("ייפתח בשבת כפרה");
+    // const { email, password } = this.state;
     // const { dispatch } = this.props;
-    // if (username && password) {
-    //   dispatch(userActions.login(username, password));
+    // if (email && password) {
+    //   dispatch(userActions.login(email, password));
     // }
   }
 
@@ -92,10 +92,10 @@ class LoginPageComponent extends React.Component {
               margin="normal"
               required
               fullWidth
-              id="username"
+              id="email"
               label="Email Address"
-              name="username"
-              autoComplete="username"
+              name="email"
+              autoComplete="email"
               onChange={e => this.handleChange(e)}
               autoFocus
             />

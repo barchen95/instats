@@ -5,18 +5,17 @@ export const authService = {
   register
 };
 
-function login(username, password) {
+function login(email, password) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ email, password })
   };
 
   return fetch(`${config.apiURL}/users/authenticate`, requestOptions)
     .then(handleResponse)
     .then(user => {
       localStorage.setItem("user", JSON.stringify(user));
-
       return user;
     });
 }
