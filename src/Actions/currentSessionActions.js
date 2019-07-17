@@ -1,7 +1,7 @@
 import { courtConstants, currentMatchConstants } from "Constants";
-import { store } from "Helpers";
+import { store, avatars } from "Helpers";
 import _ from "lodash";
-import { CurrentSessionService } from "Services";
+import { CurrentSessionService, playerService } from "Services";
 export const currentSessionActions = {
   updateCourtPlayerStatus,
   mixPlayers,
@@ -17,18 +17,42 @@ function createSession() {
     });
   };
 }
+
+async function getPlayers(callback) {
+  const players = await playerService.getAll();
+
+  players.forEach(player => {
+    avatars[player.id] = player.imageURL;
+  });
+
+  callback();
+}
 function setCurrentSession(session) {
   return dispatch => {
-    dispatch({ type: courtConstants.SET_SESSION_ID, payload: session.id });
-    dispatch({
-      type: courtConstants.MIX_PLAYERS,
-      payload: session.currentTeams
-    });
+    if (Object.entries(avatars).length === 0) {
+      getPlayers(() => {
+        session.currentTeams.forEach(team => {
+          for (
+            let playerIndex = 0;
+            playerIndex < team.players.length;
+            playerIndex++
+          ) {
+            team.players[playerIndex].imageURL =
+              avatars[team.players[playerIndex].id];
+          }
+        });
+        dispatch({
+          type: courtConstants.MIX_PLAYERS,
+          payload: session.currentTeams
+        });
+        dispatch({
+          type: currentMatchConstants.SET_TEAMS,
+          payload: session.currentTeams
+        });
+      });
+    }
 
-    dispatch({
-      type: currentMatchConstants.SET_TEAMS,
-      payload: session.currentTeams
-    });
+    dispatch({ type: courtConstants.SET_SESSION_ID, payload: session.id });
 
     dispatch({
       type: courtConstants.SET_PLAYERS,
@@ -59,26 +83,39 @@ function movePlayerBetweenTeams(playerID, currentTeam, newTeam) {
     });
   };
 }
+
 function mixPlayers() {
   return dispatch => {
     const { courtPlayers } = store.getState().currentSession;
     const { sessionID } = courtPlayers;
     let players = courtPlayers.courtPlayers;
+
     CurrentSessionService.mixPlayers(players, sessionID).then(teams => {
-      dispatch({
-        type: courtConstants.MIX_PLAYERS,
-        payload: teams
+      teams.forEach(team => {
+        for (
+          let playerIndex = 0;
+          playerIndex < team.players.length;
+          playerIndex++
+        ) {
+          team.players[playerIndex].imageURL =
+            avatars[team.players[playerIndex].id];
+        }
+
+        dispatch({
+          type: courtConstants.MIX_PLAYERS,
+          payload: teams
+        });
+
+        dispatch({
+          type: currentMatchConstants.SET_TEAMS,
+          payload: teams
+        });
       });
 
       dispatch({
-        type: currentMatchConstants.SET_TEAMS,
-        payload: teams
+        type: "REQUEST_",
+        payload: null
       });
-    });
-
-    dispatch({
-      type: "REQUEST_",
-      payload: null
     });
   };
 }

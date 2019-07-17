@@ -66,12 +66,12 @@ class LoginPageComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    alert("ייפתח בשבת כפרה");
-    // const { email, password } = this.state;
-    // const { dispatch } = this.props;
-    // if (email && password) {
-    //   dispatch(userActions.login(email, password));
-    // }
+    // alert("ייפתח בשבת כפרה");
+    const { email, password } = this.state;
+    const { dispatch } = this.props;
+    if (email && password) {
+      dispatch(userActions.login(email, password));
+    }
   }
 
   render() {

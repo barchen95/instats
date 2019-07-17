@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import LocalActivityIcon from "@material-ui/icons/LocalActivity";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
+
 const useStyles = makeStyles({
   type: {
     width: "50px",
@@ -11,6 +12,11 @@ const useStyles = makeStyles({
     opacity: 0.5,
     textAlign: "center",
     fontSize: "33px"
+  },
+  purpleAvatar: {
+    width: "50px",
+    height: "50px",
+    backgroundColor: deepPurple[500]
   },
   containter: {
     width: "50px",
@@ -22,19 +28,30 @@ const useStyles = makeStyles({
     position: "absolute"
   }
 });
+
 export const ChangeableAvatar = props => {
   const classes = useStyles();
+
+  function renderAvatar(props) {
+    const { player } = props;
+    if (player.imageURL != "") {
+      return <Avatar src={player.imageURL} className={classes.bigAvatar} />;
+    } else {
+      return (
+        <Avatar className={classes.purpleAvatar}>
+          {" "}
+          {player.firstName.charAt(0)}
+          {player.lastName.charAt(0)}
+        </Avatar>
+      );
+    }
+  }
   function onClick() {
     props.onClick(props.player, props.clicked);
   }
   return (
     <div className={classes.containter} onClick={() => onClick()}>
-      <Avatar className={classes.avatar} src={props.player.imageURL} />
-      {props.clicked && (
-        <div className={classes.type}>
-          <LocalActivityIcon />
-        </div>
-      )}
+      {renderAvatar(props)}
     </div>
   );
 };

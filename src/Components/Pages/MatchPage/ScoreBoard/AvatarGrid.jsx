@@ -1,11 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { FaFutbol } from "react-icons/fa";
-import { GiChefToque } from "react-icons/gi";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
-import Badge from "@material-ui/core/Badge";
+import { deepPurple } from "@material-ui/core/colors";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -22,6 +21,13 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: 10
+  },
+  purpleAvatar: {
+    margin: 10,
+    color: "#fff",
+    width: 60,
+    height: 60,
+    backgroundColor: deepPurple[500]
   },
   bigAvatar: {
     margin: 10,
@@ -40,42 +46,23 @@ const useStyles = makeStyles(theme => ({
 
 function generateAvatars(players, classes) {
   return players.map(player => {
-    // if (player.asScored) {
-    //   return (
-    //     <React.Fragment className={classes.margin}>
-    //       <Badge
-    //         className={{ root: classes.antiMargin }}
-    //         badgeContent={<FaFutbol />}
-    //         color="secondary"
-    //       >
-    //         <Avatar
-    //           alt="Remy Sharp"
-    //           src={player.imageURL}
-    //           className={classes.bigAvatar}
-    //         />
-    //       </Badge>
-    //     </React.Fragment>
-    //   );
-    // }
-
-    // if (player.asAssisted) {
-    //   return (
-    //     <Badge badgeContent={<GiChefToque />} color="secondary">
-    //       <Avatar
-    //         alt="Remy Sharp"
-    //         src={player.imageURL}
-    //         className={classes.bigAvatar}
-    //       />
-    //     </Badge>
-    //   );
-    // }
-    return (
-      <Avatar
-        alt="Remy Sharp"
-        src={player.imageURL}
-        className={classes.bigAvatar}
-      />
-    );
+    if (player.imageURL) {
+      return (
+        <Avatar
+          alt="Remy Sharp"
+          src={player.imageURL}
+          className={classes.bigAvatar}
+        />
+      );
+    } else {
+      return (
+        <Avatar className={classes.purpleAvatar}>
+          {" "}
+          {player.firstName.charAt(0)}
+          {player.lastName.charAt(0)}
+        </Avatar>
+      );
+    }
   });
 }
 

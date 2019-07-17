@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { avatars } from "Helpers";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
@@ -23,6 +23,11 @@ const useStyles = makeStyles(theme => ({
 
 async function getPlayers(setPlayers) {
   const players = await playerService.getAll();
+
+  players.forEach(player => {
+    avatars[player.id] = player.imageURL;
+  });
+
   setPlayers(players);
 }
 function SelectionGridComponent(props) {

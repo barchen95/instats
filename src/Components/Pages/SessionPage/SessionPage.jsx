@@ -29,7 +29,6 @@ function isToday(date) {
 }
 async function getCurrentSession(props) {
   const session = await CurrentSessionService.getCurrentSession();
-
   if (session && isToday(session.createdDate)) {
     const { dispatch } = props;
     dispatch(currentSessionActions.setCurrentSession(session));

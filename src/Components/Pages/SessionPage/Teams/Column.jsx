@@ -2,7 +2,31 @@ import React, { Component } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
+
 export default class Column extends Component {
+  renderAvatar = player => {
+    if (player.imageURL) {
+      return (
+        <Chip
+          avatar={<Avatar src={player.imageURL} />}
+          label={player.firstName}
+        />
+      );
+    } else {
+      return (
+        <Chip
+          avatar={
+            <Avatar>
+              {" "}
+              {player.firstName.charAt(0)}
+              {player.lastName.charAt(0)}
+            </Avatar>
+          }
+          label={player.firstName}
+        />
+      );
+    }
+  };
   renderPlayers = players => {
     return players.map((player, key) => {
       return (
@@ -13,10 +37,7 @@ export default class Column extends Component {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
             >
-              <Chip
-                avatar={<Avatar alt="Natacha" src={player.imageURL} />}
-                label={player.firstName}
-              />
+              {this.renderAvatar(player)}
             </div>
           )}
         </Draggable>

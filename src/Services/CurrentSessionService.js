@@ -105,20 +105,31 @@ function mixPlayers(players, sessionID) {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ sessionID: sessionID, teams: teams })
+    body: JSON.stringify({ sessionID: sessionID, teams: removeAvatars(teams) })
   };
-
   return fetch(`${config.apiURL}/gameSessions/setTeams`, requestOptions).then(
     handleResponse
   );
 }
+function removeAvatars(teams) {
+  let newTeams = [];
+  teams.forEach(team => {
+    let newTeam = [];
+    for (let playerIndex = 0; playerIndex < team.length; playerIndex++) {
+      let player = team[playerIndex];
+      delete player.imageURL;
+      newTeam.push(player);
+    }
+    newTeams.push(team);
+  });
 
+  return newTeams;
+}
 function createSession() {
   const requestOptions = {
     method: "GET",
     headers: authHeader()
   };
-
   return fetch(
     `${config.apiURL}/gameSessions/createSession`,
     requestOptions
@@ -138,7 +149,7 @@ function updateCourtPlayers(player) {
   ).then(handleResponse);
 }
 
-function handleResponse(response) {
+function handleResponse(response, oldData) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {

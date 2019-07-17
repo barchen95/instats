@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
 import { Typography } from "@material-ui/core";
 import { AddPlayerDialog } from "./AddPlayerDialog";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
 const useStyles = makeStyles({
   avatar: {
     margin: 10
@@ -17,6 +18,13 @@ const useStyles = makeStyles({
     margin: 10,
     width: 60,
     height: 60
+  },
+  purpleAvatar: {
+    margin: 10,
+    color: "#fff",
+    width: 60,
+    height: 60,
+    backgroundColor: deepPurple[500]
   },
   card: {
     float: "left",
@@ -40,13 +48,17 @@ export const ArrivedPlayersComponent = props => {
   }
   function renderAvatars(players) {
     return players.map(player => {
-      return (
-        <Avatar
-          alt="Remy Sharp"
-          src={player.imageURL}
-          className={classes.bigAvatar}
-        />
-      );
+      if (player.imageURL != "") {
+        return <Avatar src={player.imageURL} className={classes.bigAvatar} />;
+      } else {
+        return (
+          <Avatar className={classes.purpleAvatar}>
+            {" "}
+            {player.firstName.charAt(0)}
+            {player.lastName.charAt(0)}
+          </Avatar>
+        );
+      }
     });
   }
 

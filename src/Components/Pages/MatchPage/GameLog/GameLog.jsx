@@ -80,7 +80,9 @@ function GameLogComponent(props) {
               <Avatar alt="playerPic" src={log.scorer.imageURL} />
             </ListItemAvatar>
             <ListItemText
-              primary={"Goal by " + log.scorer.name}
+              primary={
+                "Goal by " + log.scorer.firstName + " " + log.scorer.lastName
+              }
               secondary={
                 formatValue(log.time.minutes) +
                 ":" +
