@@ -4,6 +4,8 @@ import "./App.css";
 import { alertActions } from "Actions";
 import { MainRouter } from "../Components/Routing";
 import { history } from "Helpers";
+import Snackbars from "../Components/General/Snackbars";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +22,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <div>
-          <div>
+          <div style={{ display: "flex", height: "100%" }}>
             {alert.message && (
-              <div className={`alert ${alert.type}`}>{alert.message}</div>
+              <Snackbars message={alert.message} variant="error" />
             )}
 
             <MainRouter />
